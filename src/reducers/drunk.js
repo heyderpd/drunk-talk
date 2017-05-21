@@ -1,32 +1,35 @@
 const TO_ALL = 'ALL'
 
 const initialState = {
+  think: false,
   speak: '...',
   listen: {}
 }
 
 export default DRUNK_NAME => {
   return function drunkReducer (state = initialState, action = {}) {
-    console.log(action)
-    switch (action.type) {
+    console.log(state.think, state, action)
+    switch (action.to) {
       case TO_ALL:
-        return action.from !== DRUNK_NAME
-          ? { ...state, listen: {
-              from: action.from,
-              message: action.payload
-            }}
-          : { ...state, speak: action.payload }
-
       case DRUNK_NAME:
-        return { ...state, listen: {
-            from: action.from,
-            message: action.payload
-          }}
+        if (action.from !== DRUNK_NAME) {
+          if (state.think === false) {
+            return {
+                ...state,
+                listen: {
+                  from: action.from,
+                  message: action.talk
+                },
+                think: true
+              }
 
+          } else {
+            return state
+          }
+        }
+      
       default:
-        return action.from === DRUNK_NAME
-          ? { ...state, speak: action.payload }
-          : state
+        return { ...state, speak: action.talk, think: false }
     }
   }
 }

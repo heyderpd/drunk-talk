@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "dictany": "^1.1.0",
+    "random-tendentious": "^1.0.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },

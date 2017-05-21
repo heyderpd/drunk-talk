@@ -13,18 +13,19 @@ const createDrunk = NAME => {
     think(listen, talkTo)
 
     return (
-      <div className="col-sm-12" onClick={() => talkTo('debug', 'ALL')} >
+      <div className="col-sm-12" onClick={() => talkTo('hi.', 'ALL')} >
         <div className="container DrunkSpace">
           <div className="row">
             <div className="col-sm-5">
               <div className="Drunk">
-                : o
+                name: { NAME } <br />
+                ( : D ) <br />
+                hear from: {listen.from} <br /> this message: {listen.message}
               </div>
-              { listen.from +'='+ listen.message }
             </div>
             <div className="col-sm-5">
               <div className="DrunkTalk">
-                { speak }
+                say: { speak }
               </div>
             </div>
           </div>

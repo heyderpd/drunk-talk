@@ -1,4 +1,4 @@
-import DICT from 'dictany'
+import { time, drunkDictionary } from './drunkDictionary'
 
 export const mapDispatchToProps = NAME => dispatch => ({
   talkTo: (TALK, TO) => dispatch(talk(NAME, TALK, TO)),
@@ -10,29 +10,21 @@ export const mapStateToProps = NAME => state => ({
 })
 
 export const talk = (NAME, TALK, TO) => ({
-  type: TO,
-  payload: TALK,
-  from: NAME
-})
-
-const debug = 'debug'
-const debug2 = 'debug again!'
-const mario = 'mama mia!'
-
-const DictResponse = DICT({
-  [debug]: debug2,
-  [debug2]: mario,
-  'DEFAULT': '...' 
+  type: 'talk',
+  from: NAME,
+  to: TO,
+  talk: TALK
 })
 
 export const think = (listen, talkTo) => {
   const { from, message } = listen
   if (message && message !== '...') {
-    let reply = DictResponse(message || '')
+    const reply = drunkDictionary(message)()
     console.log('hear!', from, message, reply)
+
     setTimeout(
       () => {
         talkTo(reply, from)
-      }, 1000)
+      }, time())
   }
 }
