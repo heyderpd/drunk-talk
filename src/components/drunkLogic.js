@@ -1,3 +1,5 @@
+import DICT from 'dictany'
+
 export const mapDispatchToProps = NAME => dispatch => ({
   talkTo: (TALK, TO) => dispatch(talk(NAME, TALK, TO)),
 })
@@ -13,23 +15,20 @@ export const talk = (NAME, TALK, TO) => ({
   from: NAME
 })
 
+const debug = 'debug'
+const debug2 = 'debug again!'
+const mario = 'mama mia!'
+
+const DictResponse = DICT({
+  [debug]: debug2,
+  [debug2]: mario,
+  'DEFAULT': '...' 
+})
+
 export const think = (listen, talkTo) => {
   const { from, message } = listen
-  let reply
-  if (message) {
-    switch (message) {
-      case 'debug':
-        reply = 'debug again!'; break
-
-      case 'debug again!':
-        reply = 'no! debug you!'; break
-
-      case 'no! debug you!':
-        reply = 'mama mia!'; break
-
-      default:
-        reply = ''
-    }
+  if (message && message !== '...') {
+    let reply = DictResponse(message || '')
     console.log('hear!', from, message, reply)
     setTimeout(
       () => {
