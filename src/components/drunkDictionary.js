@@ -12,28 +12,26 @@ const hello = 'Hello!'
 const ya = 'Ya...'
 const ok = 'Ya...'
 const mario = 'I am Mario!'
-const Luigi = 'Oh Luigi!'
+const luigi = 'Oh Luigi!'
 const pasta = 'Mamma mia!'
 const gusta = 'Me gusta.'
 
 const DictResponse = DICT({
-  [hi]:     () => coin() ? hi : hello,
-  
+  [hi]:     () => coin() ? hello : ya,
+
   [hello]:  () => coin() ? ya : ok,
 
-  [hello]:  () => coin() ? ya : pasta,
-  
-  [ok]:     () => coin() ? pasta : Luigi,
+  [ya]:     () => coin() ? luigi : mario,
 
-  [ya]:     () => coin() ? Luigi : mario,
+  [ok]:     () => coin() ? pasta : luigi,
 
-  [mario]:  () => coin() ? Luigi : hi,
+  [mario]:  () => coin() ? luigi : hi,
 
-  [Luigi]:  () => coin() ? gusta : pasta,
+  [luigi]:  () => coin() ? gusta : pasta,
 
   [pasta]:  () => gusta,
-  
-  'DEFAULT': () => '...' 
+
+  'DEFAULT': () => '...'
 })
 
 export const drunkDictionary = message => DictResponse(message || '')()
