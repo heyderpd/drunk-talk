@@ -1,13 +1,11 @@
 .Drunk {
   background-color: azure;
-  width: 8em;
-  height: 8em;
 }
 
 .DrunkTalk {
   background-color: aliceblue;
-  width: 20em;
-  height: 8em;
+  height: 16em;
+  text-align: left;
 }
 
 .DrunkSpace {

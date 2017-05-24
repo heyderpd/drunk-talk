@@ -1,4 +1,14 @@
-import { time, drunkDictionary } from './drunkDictionary'
+import { time, callAll, drunkDictionary } from './drunkDictionary'
+
+export const TALK = 'TALK'
+export const TO_ALL = 'TO_ALL'
+
+export const talk = (NAME, MSG, TO) => ({
+  type: TALK,
+  from: NAME,
+  to: TO,
+  msg: MSG
+})
 
 export const mapDispatchToProps = NAME => dispatch => ({
   talkTo: (TALK, TO) => dispatch(talk(NAME, TALK, TO)),
@@ -9,22 +19,14 @@ export const mapStateToProps = NAME => state => ({
   listen: state[NAME].listen
 })
 
-export const talk = (NAME, TALK, TO) => ({
-  type: 'talk',
-  from: NAME,
-  to: TO,
-  talk: TALK
-})
-
 export const think = (listen, talkTo) => {
   const { from, message } = listen
   if (message && message !== '...') {
-    const reply = drunkDictionary(message)()
-    console.log('hear!', from, message, reply)
-
     setTimeout(
       () => {
-        talkTo(reply, from)
+        talkTo(
+          drunkDictionary(message),
+          callAll() ? TO_ALL : from)
       }, time())
   }
 }

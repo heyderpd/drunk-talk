@@ -1,35 +1,36 @@
-const TO_ALL = 'ALL'
+import { TO_ALL, TALK } from '../components/drunkLogic'
 
 const initialState = {
   think: false,
-  speak: '...',
+  speak: [],
   listen: {}
 }
 
 export default DRUNK_NAME => {
   return function drunkReducer (state = initialState, action = {}) {
-    console.log(state.think, state, action)
-    switch (action.to) {
-      case TO_ALL:
-      case DRUNK_NAME:
-        if (action.from !== DRUNK_NAME) {
-          if (state.think === false) {
-            return {
-                ...state,
-                listen: {
-                  from: action.from,
-                  message: action.talk
-                },
-                think: true
-              }
-
-          } else {
-            return state
-          }
+    const { type, msg, from, to } = action
+    if (type === TALK) {
+      if (!state.think && from !== DRUNK_NAME && (to === TO_ALL || to === DRUNK_NAME)) {
+        return {
+          ...state,
+          listen: {
+            from: from,
+            message: msg
+          },
+          think: true
         }
-      
-      default:
-        return { ...state, speak: action.talk, think: false }
+      }
+      if (from === DRUNK_NAME) {
+        return {
+          ...state,
+          listen: {},
+          speak: [
+            ...state.speak,
+            `@${to}: ${msg}` ],
+          think: false
+        }
+      }
     }
+    return state
   }
 }
