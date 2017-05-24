@@ -10,7 +10,7 @@ export const callAll = () => Math.random() <= 0.2
 const hi = 'Hi.'
 const hello = 'Hello!'
 const ya = 'Ya...'
-const ok = 'Ya...'
+const ok = 'ok!'
 const mario = 'I am Mario!'
 const luigi = 'Oh Luigi!'
 const pasta = 'Mamma mia!'
