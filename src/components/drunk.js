@@ -11,22 +11,19 @@ const createDrunk = NAME => {
     listen,
   }) => {
     think(listen, talkTo)
+    const _speak = speak.length <= 6
+      ? speak
+      : speak.slice(speak.length -6)
 
     return (
-      <div className="col-sm-12" onClick={() => talkTo('Hi.', 'TO_ALL')} >
-        <div className="container DrunkSpace">
-          <div className="row">
-            <div className="col-sm-2 Drunk">
-              name: { NAME } <br />
-              ( : D ) <br />
-            </div>
-            <div className="col-sm-5 DrunkTalk">
-              say: {
-                speak
-                  .map(msg => (<div className="col-sm-12">{msg}</div>))
-              }
-            </div>
-          </div>
+      <div className="drunk" onClick={() => talkTo('Hi.', 'TO_ALL')}>
+        <div>( : D )</div>
+        <div>{ NAME }</div>
+        <div>
+          say: {
+            _speak
+              .map((msg, key) => (<div key={key} className="col-sm-12">{msg}</div>))
+          }
         </div>
       </div>
     )

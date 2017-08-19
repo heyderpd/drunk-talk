@@ -1,13 +1,39 @@
-.Drunk {
-  background-color: azure;
-}
-
-.DrunkTalk {
+.drunk {
   background-color: aliceblue;
-  height: 16em;
-  text-align: left;
+  width: 30em;
+  height: 12em;
+  margin: 1em;
+  border-radius: 1em;
+  position: relative;
+  display: flow-root;
 }
 
-.DrunkSpace {
+.drunk > div:nth-child(1)  {
+  background-color: aqua;
+  display: -ms-inline-flexbox;
+  display: block;
+  width: 5em;
+  height: 5em;
+  margin: 1em 0 0 1em;
+  border: 0;
+  vertical-align: top;
+}
+
+.drunk > div:nth-child(2)  {
+  width: 5em;
+  height: 2em;
+  background-color: azure;
+  display: block;
   margin: 1em;
+}
+
+.drunk > div:nth-child(3)  {
+  background-color: bisque;
+  width: 22em;
+  height: 10em;
+  margin: 1em;
+  position: absolute;
+  top: 0;
+  left: 6em;
+  text-align: left;
 }
